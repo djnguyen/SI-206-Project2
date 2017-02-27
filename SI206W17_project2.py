@@ -1,7 +1,8 @@
 ## SI 206 W17 - Project 2 
 
 ## COMMENT HERE WITH:
-## Your name:
+## Your name: David Nguyen (djnguyen)
+## Discussion: Thursday (3-4 PM)
 ## Anyone you worked with on this project:
 
 ## Below we have provided import statements, comments to separate out the parts of the project, instructions/hints/examples, and at the end, tests. See the PDF of instructions for more detail. 
@@ -19,6 +20,8 @@ from bs4 import BeautifulSoup
 
 ## Tweepy authentication setup
 ## Fill these in in the twitter_info.py file
+## Created a secret twitter_info.py file that contains my Personal Account's Secret Keys!
+
 consumer_key = twitter_info.consumer_key
 consumer_secret = twitter_info.consumer_secret
 access_token = twitter_info.access_token
@@ -32,6 +35,21 @@ api = tweepy.API(auth, parser=tweepy.parsers.JSONParser())
 ## Part 0 -- CACHING SETUP
 
 ## Write the code to begin your caching pattern setup here.
+
+CACHE_FNAME = "206project2_caching.json"
+
+try:
+    cache_file = open(CACHE_FNAME,'r') #reading the data from the cache file
+
+    cache_contents = cache_file.read() # get the data into a string
+
+    CACHE_DICTION = json.loads(cache_contents) #load that stuff info a dictionary
+
+    cache_file.close() # close that file when were done with it
+
+except:
+
+    CACHE_DICTION = {} # if there is nothing there, make sure that CACHE_DICTION is empty!
 
 
 
