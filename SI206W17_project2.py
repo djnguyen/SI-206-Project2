@@ -3,7 +3,7 @@
 ## COMMENT HERE WITH:
 ## Your name: David Nguyen (djnguyen)
 ## Discussion: Thursday (3-4 PM)
-## Anyone you worked with on this project:
+## Anyone you worked with on this project: N/A
 
 ## Below we have provided import statements, comments to separate out the parts of the project, instructions/hints/examples, and at the end, tests. See the PDF of instructions for more detail. 
 ## You can check out the SAMPLE206project2_caching.json for an example of what your cache file might look like.
@@ -63,7 +63,8 @@ except:
 ## find_urls("I love looking at websites like http://etsy.com and http://instagram.com and stuff") should return ["http://etsy.com","http://instagram.com"]
 ## find_urls("the internet is awesome #worldwideweb") should return [], empty list
 
-
+def find_urls(input_string):
+	pass
 
 
 
@@ -79,7 +80,8 @@ except:
 ## Start with this page: https://www.si.umich.edu/directory?field_person_firstname_value=&field_person_lastname_value=&rid=All  
 ## End with this page: https://www.si.umich.edu/directory?field_person_firstname_value=&field_person_lastname_value=&rid=All&page=11 
 
-
+def get_umsi_data():
+	pass
 
 
 
@@ -88,6 +90,7 @@ except:
 ## PART 2 (b) - Create a dictionary saved in a variable umsi_titles 
 ## whose keys are UMSI people's names, and whose associated values are those people's titles, e.g. "PhD student" or "Associate Professor of Information"...
 
+umsi_titles = []
 
 
 
@@ -99,7 +102,8 @@ except:
 ## Behavior: See instructions. Should search for the input string on twitter and get results. Should check for cached data, use it if possible, and if not, cache the data retrieved.
 ## RETURN VALUE: A list of strings: A list of just the text of 5 different tweets that result from the search.
 
-
+def get_five_tweets(any_string):
+	pass
 
 
 ## PART 3 (b) - Write one line of code to invoke the get_five_tweets function with the phrase "University of Michigan" and save the result in a variable five_tweets.
