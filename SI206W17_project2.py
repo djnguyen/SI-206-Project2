@@ -69,14 +69,14 @@ def find_urls(input_string):
 
 	return parsed_urls
 
-
 # print ("FAIL")
 # print (find_urls('http://bbc.'))
 
+# print ("FAIL")
+# print (find_urls('gmail.gov'))
+
 # print ("PASS")
 # print (find_urls('http://nationalparkservice.gov/pictures/badlands'))
-
-
 
 ## PART 2 (a) - Define a function called get_umsi_data.
 ## INPUT: N/A. No input.
@@ -94,22 +94,22 @@ def get_umsi_data():
 	response_data = []
 
 	if umsi_cache_id in CACHE_DICTION:
-		#print ("Using the Cached Data from the UMSI Website...")
+		# print ("Using the Cached Data from the UMSI Website...")
 		return CACHE_DICTION[umsi_cache_id]
 
 	else:
-		#print ("Gathering Data from UMSI Website...")
+		# print ("Gathering Data from UMSI Website...")
 
-		for page in range(0,12):
+		for page in range(0,12): #because there are 12 pages in the SI Directory
 			request_url = umsi_base_url + str(page)
 			messy_data = requests.get(request_url, headers={'User-Agent': 'SI_CLASS'})
 			response_data.append(messy_data.text)
 			
 		CACHE_DICTION[umsi_cache_id] = response_data
 		
-		dumping_data = open(CACHE_FNAME,'w')
-		dumping_data.write(json.dumps(CACHE_DICTION))
-		dumping_data.close()
+		dump_data = open(CACHE_FNAME,'w')
+		dump_data.write(json.dumps(CACHE_DICTION))
+		dump_data.close()
 
 	return CACHE_DICTION[umsi_cache_id]
 
@@ -117,14 +117,14 @@ def get_umsi_data():
 ## PART 2 (b) - Create a dictionary saved in a variable umsi_titles 
 ## whose keys are UMSI people's names, and whose associated values are those people's titles, e.g. "PhD student" or "Associate Professor of Information"...
 
-umsi_titles = []
+umsi_titles = {}
 
 persons_name = []
 persons_title = []
 
-for something in get_umsi_data():
+for a_person in get_umsi_data():
 	
-	the_soup = BeautifulSoup(something,'html.parser')
+	the_soup = BeautifulSoup(a_person,'html.parser')
 
 	for name in the_soup.find_all('div', {'class': 'field-name-title'}):
 		persons_name.append(name.text)
@@ -132,8 +132,9 @@ for something in get_umsi_data():
 	for title in the_soup.find_all('div',{'class': 'field-name-field-person-titles'}):
 		persons_title.append(title.text)
 
-umsi_titles = dict(zip(persons_name,persons_title))
+umsi_titles = dict(zip(persons_name,persons_title)) #using the two lists to zip them together to make a dictionary!
 
+# print (umsi_titles)
 
 ## PART 3 (a) - Define a function get_five_tweets
 ## INPUT: Any string
@@ -151,9 +152,9 @@ def get_five_tweets(any_string):
 		tweet_results = api.search(q=any_string)
 		CACHE_DICTION[some_identifier] = tweet_results
 
-		dumping_data = open(CACHE_FNAME,'w')
-		dumping_data.write(json.dumps(CACHE_DICTION))
-		dumping_data.close()
+		dumping_results = open(CACHE_FNAME,'w')
+		dumping_results.write(json.dumps(CACHE_DICTION))
+		dumping_results.close()
 
 	top_five_tweets = []
 
@@ -166,15 +167,9 @@ def get_five_tweets(any_string):
 
 five_tweets = get_five_tweets("University of Michigan")
 
-#print (five_tweets)
+# print (five_tweets)
+
 ## PART 3 (c) - Iterate over the five_tweets list, invoke the find_urls function that you defined in Part 1 on each element of the list, and accumulate a new list of each of the total URLs in all five of those tweets in a variable called tweet_urls_found. 
-
-# tweet_urls_found = ()
-
-# for tweet in five_tweets:
-# 	a_URL = find_urls(tweet)
-# 	if a_URL:
-# 		tweet_urls_found += tuple(a_URL)
 
 tweet_urls_list = []
 
@@ -182,9 +177,9 @@ for tweet in five_tweets:
 	for a_url in find_urls(tweet):
 		tweet_urls_list.append(a_url)
 
-tweet_urls_found = tuple(tweet_urls_list)
+tweet_urls_found = tuple(tweet_urls_list) #casting the list to a tuple so that it can pass the test provided below
 
-#print (tweet_urls_found)
+# print (tweet_urls_found)
 
 ########### TESTS; DO NOT CHANGE ANY CODE BELOW THIS LINE! ###########
 
